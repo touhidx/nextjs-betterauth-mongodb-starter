@@ -1,15 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { Link, Button } from "@heroui/react";
+import { Link, Button, Spinner } from "@heroui/react";
 import React from "react";
-import { useSession } from "@/lib/auth-client";
+import { signOut, useSession } from "@/lib/auth-client";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen, isPanding] = useState(false);
 
   const { data: session } = useSession();
-
+  if (isPanding) {
+    <div className="flex flex-col items-center gap-2">
+      <Spinner size="xl" />
+      <span className="text-xs text-muted">Extra Large</span>
+    </div>;
+  }
   const links = (
     <>
       <li>
@@ -31,12 +36,14 @@ const Navbar = () => {
       {session?.user ? (
         <>
           <span>Welcome {session?.user?.name}</span>
-          <Button className="">Sign Out</Button>
+          <Button className="" onClick={() => signOut()}>
+            Sign Out
+          </Button>
         </>
       ) : (
         <>
-          <Link href="#">Login</Link>
-          <Button>Sign Up</Button>
+          <Link href="/sign-in">Login</Link>
+          <Link href="/sign-up">Sign Up</Link>
         </>
       )}
     </>
@@ -89,10 +96,7 @@ const Navbar = () => {
           <ul className="flex flex-col gap-2 p-4">
             {links}
             <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
-              <Link href="#" className="block py-2">
-                Login
-              </Link>
-              <Button className="w-full">Sign Up</Button>
+              {authLinks}
             </li>
           </ul>
         </div>
