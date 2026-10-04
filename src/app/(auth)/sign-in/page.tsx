@@ -51,11 +51,7 @@ const SignInPage = () => {
       <TextField className="w-full max-w-[280px]" name="password">
         <Label>Password</Label>
         <InputGroup>
-          <InputGroup.Input
-            className="w-full max-w-[280px]"
-            type={isVisible ? "text" : "password"}
-            value={isVisible ? "87$2h.3diua" : "••••••••"}
-          />
+          <InputGroup.Input className="w-full max-w-[280px]" type="password" />
           <InputGroup.Suffix className="pe-0">
             <Button
               isIconOnly

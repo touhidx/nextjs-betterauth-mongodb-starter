@@ -35,15 +35,15 @@ const Navbar = () => {
     <>
       {session?.user ? (
         <>
-          <span>Welcome {session?.user?.name}</span>
-          <Button className="" onClick={() => signOut()}>
-            Sign Out
-          </Button>
+          <span>Welcome, {session.user?.name}</span>
+          <Button onClick={() => signOut()}>Sign Out</Button>
         </>
       ) : (
         <>
-          <Link href="/sign-in">Login</Link>
-          <Link href="/sign-up">Sign Up</Link>
+          <Link href="/sign-in">Sign in</Link>
+          <Link href="/sign-up">
+            <Button>Sign Up</Button>
+          </Link>
         </>
       )}
     </>
